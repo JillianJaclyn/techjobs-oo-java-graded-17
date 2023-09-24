@@ -2,6 +2,7 @@ package org.launchcode.techjobs.oo;
 
 import org.junit.Test;
 
+import static java.lang.System.lineSeparator;
 import static org.junit.Assert.*;
 
 public class JobTest {
@@ -31,5 +32,28 @@ public class JobTest {
         Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job testJob2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         assertFalse(testJob1.equals(testJob2));
+    }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        String jobString = testJob1.toString();
+        String lineSeparator = System.lineSeparator();
+
+        assertTrue(jobString.startsWith(lineSeparator));
+        assertTrue(jobString.endsWith(lineSeparator));
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job testJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String jobString = testJob1.toString();
+        assertEquals(testJob1.toString(), jobString);
+    }
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job testJob1 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String jobString = testJob1.toString();
+        assertEquals("Data not available", testJob1.getEmployer().toString());
     }
 }
