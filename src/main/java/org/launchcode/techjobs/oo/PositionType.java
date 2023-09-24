@@ -22,7 +22,7 @@ public class PositionType {
 
     @Override
     public String toString() {
-        return "PositionType:" + value;
+        return value;
     }
 
 
